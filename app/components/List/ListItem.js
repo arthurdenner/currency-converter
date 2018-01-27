@@ -1,17 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, TouchableHighlight, View } from 'react-native';
+import styled from 'styled-components';
+import { TouchableHighlight } from 'react-native';
 import Icon from './Icon';
 
-import styles from './styles';
+const ListRow = styled.View`
+  padding: 16px 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+`;
+
+const ListText = styled.Text`
+  font-size: 16;
+  color: #343434;
+`;
 
 const ListItem = ({ customIcon, onPress, selected, text, ...rest }) => (
-  <TouchableHighlight underlayColor={styles.$underlayColor} onPress={onPress}>
-    <View style={styles.row}>
-      <Text style={styles.text}>{text}</Text>
+  <TouchableHighlight underlayColor="#E2E2E2" onPress={onPress}>
+    <ListRow>
+      <ListText>{text}</ListText>
       {selected && <Icon {...rest} />}
       {customIcon}
-    </View>
+    </ListRow>
   </TouchableHighlight>
 );
 

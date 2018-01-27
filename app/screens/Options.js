@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'redux-zero/react';
 import { Linking, ScrollView, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ListItem, Separator } from '../components/List';
@@ -13,6 +14,7 @@ class Options extends Component {
   static propTypes = {
     alertWithType: PropTypes.func.isRequired,
     navigation: PropTypes.object.isRequired,
+    primaryColor: PropTypes.string.isRequired,
   };
 
   handleThemesPress = () => {
@@ -30,9 +32,12 @@ class Options extends Component {
   };
 
   render() {
+    const { primaryColor } = this.props;
+
     return (
       <ScrollView>
         <ListItem
+          backgroundColor={primaryColor}
           customIcon={
             <Ionicons
               color={ICON_COLOR}
@@ -45,6 +50,7 @@ class Options extends Component {
         />
         <Separator />
         <ListItem
+          backgroundColor={primaryColor}
           customIcon={
             <Ionicons
               color={ICON_COLOR}
@@ -61,4 +67,8 @@ class Options extends Component {
   }
 }
 
-export default connectAlert(Options);
+const mapStateToProps = ({ theme }) => ({
+  primaryColor: theme.primaryColor,
+});
+
+export default connect(mapStateToProps)(connectAlert(Options));

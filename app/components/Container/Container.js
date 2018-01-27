@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, View, TouchableWithoutFeedback } from 'react-native';
-import styles from './styles';
+import styled from 'styled-components';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
-const Container = ({ backgroundColor, children }) => {
-  const containerStyles = [styles.container, { backgroundColor }];
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.backgroundColor};
+`;
 
-  return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={containerStyles}>{children}</View>
-    </TouchableWithoutFeedback>
-  );
-};
+const AppContainer = ({ backgroundColor, children }) => (
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <Container backgroundColor={backgroundColor}>{children}</Container>
+  </TouchableWithoutFeedback>
+);
 
-Container.propTypes = {
+AppContainer.propTypes = {
   backgroundColor: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default Container;
+export default AppContainer;
