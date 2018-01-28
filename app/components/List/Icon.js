@@ -1,42 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, View } from 'react-native';
-import styles from './styles';
+import styled from 'styled-components';
 
-const Icon = ({ backgroundColor, checkmark, visible }) => {
-  const iconStyles = [styles.icon];
+const Container = styled.View`
+  width: 30;
+  height: 30;
+  background-color: ${props => props.backgroundColor};
+  border-radius: 15;
+  justify-content: center;
+  align-items: center;
+`;
 
-  if (visible) {
-    iconStyles.push(styles.iconVisible);
-  }
+const CheckIcon = styled.Image`
+  width: 16;
+`;
 
-  if (backgroundColor) {
-    iconStyles.push({ backgroundColor });
-  }
-
-  return (
-    <View style={iconStyles}>
-      {checkmark && (
-        <Image
-          resizeMode="contain"
-          source={require('./images/check.png')}
-          style={styles.checkIcon}
-        />
-      )}
-    </View>
-  );
-};
+const Icon = ({ checkmark, ...rest }) => (
+  <Container {...rest}>
+    {checkmark && (
+      <CheckIcon resizeMode="contain" source={require('./images/check.png')} />
+    )}
+  </Container>
+);
 
 Icon.propTypes = {
-  backgroundColor: PropTypes.string,
+  backgroundColor: PropTypes.string.isRequired,
   checkmark: PropTypes.bool,
-  visible: PropTypes.bool,
 };
 
 Icon.defaultProps = {
-  backgroundColor: '',
   checkmark: true,
-  visible: true,
 };
 
 export default Icon;

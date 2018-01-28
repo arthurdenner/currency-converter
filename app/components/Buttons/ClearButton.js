@@ -1,28 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
+import styled from 'styled-components';
+
+const Container = styled.TouchableOpacity`
+  align-items: center;
+`;
+const Wrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Image = styled.Image`
+  width: 19px;
+  margin-right: 11;
+`;
+
+const ButtonText = styled.Text`
+  color: ${props => props.theme.white};
+`;
 
 const ClearButton = ({ onPress, text }) => (
-  <TouchableOpacity style={styles.container} onPress={onPress}>
-    <View style={styles.wrapper}>
-      <Image
-        resizeMode="contain"
-        source={require('./images/icon.png')}
-        style={styles.image}
-      />
-      <Text style={styles.text}>{text}</Text>
-    </View>
-  </TouchableOpacity>
+  <Container onPress={onPress}>
+    <Wrapper>
+      <Image resizeMode="contain" source={require('./images/icon.png')} />
+      <ButtonText>{text}</ButtonText>
+    </Wrapper>
+  </Container>
 );
 
 ClearButton.propTypes = {
-  onPress: PropTypes.func,
+  onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-};
-
-ClearButton.defaultProps = {
-  onPress: () => {},
 };
 
 export default ClearButton;

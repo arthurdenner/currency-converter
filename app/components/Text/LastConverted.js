@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { format } from 'date-fns';
-import { Text } from 'react-native';
-import styles from './styles';
+
+const SmallText = styled.Text`
+  text-align: center;
+  font-size: 12;
+  color: ${props => props.theme.white};
+`;
 
 const LastConverted = ({ base, quote, conversionRate, date }) => (
-  <Text style={styles.smallText}>
+  <SmallText>
     1 {base} = {conversionRate} {quote} as of {format(date, 'MMMM DD, YYYY')}
-  </Text>
+  </SmallText>
 );
 
 LastConverted.propTypes = {
