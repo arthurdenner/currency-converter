@@ -1,17 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   Animated,
+  Dimensions,
   Keyboard,
   Platform,
   StyleSheet,
-  Text,
-  View,
 } from 'react-native';
-import styles from './styles';
 
 const isAndroid = Platform.OS === 'android';
-const ANIMATION_DURATION = 250;
+const deviceWidth = Dimensions.get('window').width / 2;
+const LARGE_CONTAINER = deviceWidth;
+const LARGE_IMAGE = deviceWidth / 2;
+const SMALL_CONTAINER = deviceWidth / 2;
+const SMALL_IMAGE = deviceWidth / 4;
+const ANIMATION_DURATION = 200;
+
+const styles = StyleSheet.create({
+  containerImage: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+const LogoContainer = styled.View`
+  align-items: center;
+`;
+
+const LogoText = styled.Text`
+  font-size: 28;
+  font-weight: 600;
+  letter-spacing: -0.5;
+  margin-top: 15;
+  color: #ffffff;
+`;
 
 class Logo extends Component {
   static propTypes = {
@@ -19,8 +42,8 @@ class Logo extends Component {
   };
 
   state = {
-    containerImageWidth: new Animated.Value(styles.$largeContainerSize),
-    imageWidth: new Animated.Value(styles.$largeImageSize),
+    containerImageWidth: new Animated.Value(LARGE_CONTAINER),
+    imageWidth: new Animated.Value(LARGE_IMAGE),
   };
 
   componentDidMount() {
@@ -45,11 +68,11 @@ class Logo extends Component {
   keyboardShow = () => {
     Animated.parallel([
       Animated.timing(this.state.containerImageWidth, {
-        toValue: styles.$smallContainerSize,
+        toValue: SMALL_CONTAINER,
         duration: ANIMATION_DURATION,
       }),
       Animated.timing(this.state.imageWidth, {
-        toValue: styles.$smallImageSize,
+        toValue: SMALL_IMAGE,
         duration: ANIMATION_DURATION,
       }),
     ]).start();
@@ -58,11 +81,11 @@ class Logo extends Component {
   keyboardHide = () => {
     Animated.parallel([
       Animated.timing(this.state.containerImageWidth, {
-        toValue: styles.$largeContainerSize,
+        toValue: LARGE_CONTAINER,
         duration: ANIMATION_DURATION,
       }),
       Animated.timing(this.state.imageWidth, {
-        toValue: styles.$largeImageSize,
+        toValue: LARGE_IMAGE,
         duration: ANIMATION_DURATION,
       }),
     ]).start();
@@ -76,10 +99,9 @@ class Logo extends Component {
       styles.containerImage,
       { width: containerImageWidth, height: containerImageWidth },
     ];
-    const imageStyles = [styles.logo, { width: imageWidth, tintColor }];
 
     return (
-      <View style={styles.container}>
+      <LogoContainer>
         <Animated.View style={containerImageStyles}>
           <Animated.Image
             resizeMode="contain"
@@ -89,11 +111,11 @@ class Logo extends Component {
           <Animated.Image
             resizeMode="contain"
             source={require('./images/logo.png')}
-            style={imageStyles}
+            style={{ width: imageWidth, tintColor }}
           />
         </Animated.View>
-        <Text style={styles.text}>Currency Converter</Text>
-      </View>
+        <LogoText>Currency Converter</LogoText>
+      </LogoContainer>
     );
   }
 }
