@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'redux-zero/react';
-import { ScrollView, StatusBar } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { ScrollView, StatusBar, View } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { actions as themeActions } from '../store/theme';
-
-const styles = EStyleSheet.create({
-  $blue: '$primaryBlue',
-  $orange: '$primaryOrange',
-  $green: '$primaryGreen',
-  $purple: '$primaryPurple',
-});
 
 class Themes extends Component {
   static propTypes = {
     changePrimaryColor: PropTypes.func.isRequired,
+    colors: PropTypes.array.isRequired,
     navigation: PropTypes.object.isRequired,
   };
 
@@ -27,45 +20,31 @@ class Themes extends Component {
   };
 
   render() {
+    const { colors } = this.props;
+
     return (
       <ScrollView>
         <StatusBar translucent={false} barStyle="default" />
-        <ListItem
-          id="what"
-          checkmark={false}
-          onPress={() => this.handleThemePress(styles.$blue)}
-          text="Blue"
-          backgroundColor={styles.$blue}
-          selected
-        />
-        <Separator />
-        <ListItem
-          checkmark={false}
-          onPress={() => this.handleThemePress(styles.$orange)}
-          text="Orange"
-          backgroundColor={styles.$orange}
-          selected
-        />
-        <Separator />
-        <ListItem
-          checkmark={false}
-          onPress={() => this.handleThemePress(styles.$green)}
-          text="Green"
-          backgroundColor={styles.$green}
-          selected
-        />
-        <Separator />
-        <ListItem
-          checkmark={false}
-          onPress={() => this.handleThemePress(styles.$purple)}
-          text="Purple"
-          backgroundColor={styles.$purple}
-          selected
-        />
+        {colors.map(c => (
+          <View key={c.name}>
+            <ListItem
+              checkmark={false}
+              onPress={() => this.handleThemePress(c.color)}
+              text={c.name}
+              backgroundColor={c.color}
+              selected
+            />
+            <Separator />
+          </View>
+        ))}
         <Separator />
       </ScrollView>
     );
   }
 }
 
-export default connect(null, themeActions)(Themes);
+const mapStateToProps = ({ theme }) => ({
+  colors: theme.colors,
+});
+
+export default connect(mapStateToProps, themeActions)(Themes);

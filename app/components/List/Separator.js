@@ -5,7 +5,7 @@ const Separator = styled.View`
   margin-left: 20;
   flex: 1;
   height: ${StyleSheet.hairlineWidth};
-  background-color: ${props => props.theme.border || '#E2E2E2'};
+  background-color: #e2e2e2;
 `;
 
 export default Separator;

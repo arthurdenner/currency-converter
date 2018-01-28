@@ -16,7 +16,7 @@ const Image = styled.Image`
 `;
 
 const ButtonText = styled.Text`
-  color: ${props => props.theme.white || '#FFFFFF'};
+  color: #ffffff;
 `;
 
 const ClearButton = ({ onPress, text }) => (
@@ -29,12 +29,8 @@ const ClearButton = ({ onPress, text }) => (
 );
 
 ClearButton.propTypes = {
-  onPress: PropTypes.func,
+  onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-};
-
-ClearButton.defaultProps = {
-  onPress: () => {},
 };
 
 export default ClearButton;
