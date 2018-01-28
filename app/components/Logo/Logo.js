@@ -33,7 +33,7 @@ const LogoText = styled.Text`
   font-weight: 600;
   letter-spacing: -0.5;
   margin-top: 15;
-  color: #ffffff;
+  color: ${props => props.theme.white};
 `;
 
 class Logo extends Component {

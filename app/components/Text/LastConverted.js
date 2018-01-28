@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 const SmallText = styled.Text`
   text-align: center;
   font-size: 12;
-  color: #ffffff;
+  color: ${props => props.theme.white};
 `;
 
 const LastConverted = ({ base, quote, conversionRate, date }) => (

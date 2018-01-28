@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { TouchableHighlight } from 'react-native';
 import Icon from './Icon';
 
@@ -9,16 +9,16 @@ const ListRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
 `;
 
 const ListText = styled.Text`
   font-size: 16;
-  color: #343434;
+  color: ${props => props.theme.darkestGray};
 `;
 
-const ListItem = ({ customIcon, onPress, selected, text, ...rest }) => (
-  <TouchableHighlight underlayColor="#E2E2E2" onPress={onPress}>
+const ListItem = ({ customIcon, onPress, selected, text, theme, ...rest }) => (
+  <TouchableHighlight underlayColor={theme.lightGray} onPress={onPress}>
     <ListRow>
       <ListText>{text}</ListText>
       {selected && <Icon {...rest} />}
@@ -32,6 +32,7 @@ ListItem.propTypes = {
   onPress: PropTypes.func.isRequired,
   selected: PropTypes.bool,
   text: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
 ListItem.defaultProps = {
@@ -39,4 +40,4 @@ ListItem.defaultProps = {
   selected: false,
 };
 
-export default ListItem;
+export default withTheme(ListItem);

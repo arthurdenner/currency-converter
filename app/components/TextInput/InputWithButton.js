@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { StyleSheet } from 'react-native';
 
 const INPUT_HEIGHT = 48;
 const BORDER_RADIUS = 4;
 
 const Container = styled.View`
-  background-color: ${props => (!props.editable ? '#F0F0F0' : '#FFFFFF')};
+  background-color: ${props =>
+    !props.editable ? props.theme.disabled : props.theme.white};
   width: 90%;
   height: ${INPUT_HEIGHT};
   margin: 11px 0;
@@ -20,7 +21,7 @@ const ButtonContainer = styled.TouchableHighlight`
   height: ${INPUT_HEIGHT};
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
   border-top-left-radius: ${BORDER_RADIUS};
   border-bottom-left-radius: ${BORDER_RADIUS};
 `;
@@ -35,13 +36,13 @@ const ButtonText = styled.Text`
 const Border = styled.View`
   height: ${INPUT_HEIGHT};
   width: ${StyleSheet.hairlineWidth};
-  background-color: #e2e2e2;
+  background-color: ${props => props.theme.lightGray};
 `;
 
 const TextInput = styled.TextInput`
   height: ${INPUT_HEIGHT};
   padding: 0 8px;
-  color: #797979;
+  color: ${props => props.theme.gray};
   font-size: 18;
   flex: 1;
 `;
@@ -51,10 +52,11 @@ const InputWithButton = ({
   editable,
   onPress,
   textColor,
+  theme,
   ...rest
 }) => (
   <Container editable={editable}>
-    <ButtonContainer underlayColor="#E6E6E6" onPress={onPress}>
+    <ButtonContainer underlayColor={theme.lightGray} onPress={onPress}>
       <ButtonText textColor={textColor}>{buttonText}</ButtonText>
     </ButtonContainer>
     <Border />
@@ -71,6 +73,7 @@ InputWithButton.propTypes = {
   editable: PropTypes.bool,
   onPress: PropTypes.func,
   textColor: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
 InputWithButton.defaultProps = {
@@ -78,4 +81,4 @@ InputWithButton.defaultProps = {
   onPress: () => {},
 };
 
-export default InputWithButton;
+export default withTheme(InputWithButton);

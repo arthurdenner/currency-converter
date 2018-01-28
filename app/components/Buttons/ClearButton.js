@@ -16,7 +16,7 @@ const Image = styled.Image`
 `;
 
 const ButtonText = styled.Text`
-  color: #ffffff;
+  color: ${props => props.theme.white};
 `;
 
 const ClearButton = ({ onPress, text }) => (
