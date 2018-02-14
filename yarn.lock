@@ -5802,6 +5802,10 @@ redux-zero-logger@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/redux-zero-logger/-/redux-zero-logger-0.1.1.tgz#d0c724c589c3165fadf6d82e3f51f737e0179039"
 
+redux-zero-persist@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/redux-zero-persist/-/redux-zero-persist-0.2.6.tgz#9f43d5c344402f8167447afa8cbbefceeeba6bf3"
+
 redux-zero@^4.10.0:
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/redux-zero/-/redux-zero-4.10.0.tgz#405b56983f118d01904c5e644ce2d67c8153e1f0"
