@@ -15,5 +15,5 @@ Well, since I've finished the course, I'm going to continue my study refactoring
 #### Next steps
 
 * [x] Use [styled-components](https://github.com/styled-components/styled-components) - never used and it seems fantastic
-* [ ] Persist user's theme choice - that's essencial
+* [x] Persist user's theme choice - that's essencial
 * [ ] Create the option to add more colors
